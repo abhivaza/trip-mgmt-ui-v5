@@ -14,7 +14,7 @@ export default function LoadingSpinner({
     >
       <div className="relative">
         {/* Gradient background pulse */}
-        <div className="absolute inset-0 animate-pulse-slow rounded-full bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 blur-xl opacity-70" />
+        <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 blur-xl opacity-70" />
 
         {/* Main spinner circles */}
         <motion.div
@@ -26,16 +26,7 @@ export default function LoadingSpinner({
             ease: "linear",
           }}
         >
-          <div
-            className="absolute rounded-full border-2 border-transparent"
-            style={{
-              width: `80px`,
-              height: `80px`,
-              borderTopColor: `rgba(219, 39, 119, ${0.8 * 0.2})`,
-              borderRightColor: `rgba(124, 58, 237, ${0.8 * 0.2})`,
-              animation: `spin ${2 * 0.5}s linear infinite`,
-            }}
-          />
+          <div className="absolute h-20 w-20 rounded-full border-2 border-transparent border-t-pink-500/20 border-r-purple-500/20 animate-spin" />
 
           {/* Center icon */}
           <div className="relative h-8 w-8 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 shadow-lg">
@@ -61,17 +52,6 @@ export default function LoadingSpinner({
 
       {/* Hidden text for screen readers */}
       <span className="sr-only">{text}</span>
-
-      <style jsx>{`
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 }
