@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
 import {
   Dialog,
   DialogContent,
@@ -52,7 +51,7 @@ export default function LoginPopup({
 
   const handleSuccessfulAuth = () => {
     onClose();
-    router.push("/app/trips");
+    router("/app/trips");
   };
 
   const signInWithGoogle = async () => {

@@ -27,7 +27,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useApi } from "@/context/api-provider";
 import { DeleteConfirmDialog } from "./delete-confirmation-dialog";
 import type { Itinerary } from "@/types/itinerary";
-import { useRouter } from "next/navigation";
 import { useNavigate } from "react-router-dom";
 
 interface ShareTripDialogProps {
@@ -98,7 +97,7 @@ function ShareTripDialog({
       setIsDeleteDialogOpen(false);
       setUserToDelete(null);
       onOpenChange(false);
-      router.refresh();
+      router(0);
     }
   };
 
@@ -221,7 +220,7 @@ export function TripToolbar({ trip, className }: ShareTripButtonProps) {
       });
     } finally {
       setIsShareDialogOpen(false);
-      router.refresh();
+      router(0);
     }
   };
 
@@ -233,7 +232,7 @@ export function TripToolbar({ trip, className }: ShareTripButtonProps) {
         description: "Trip deleted successfully!",
       });
 
-      router.push("/app/trips");
+      router("/app/trips");
     } catch (error) {
       console.error("Error deleting trip:", error);
       toast({

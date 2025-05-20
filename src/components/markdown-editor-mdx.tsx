@@ -13,6 +13,9 @@ import {
   type MDXEditorMethods,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
+import { CreateLink } from "@mdxeditor/editor";
+import { linkPlugin } from "@mdxeditor/editor";
+import { linkDialogPlugin } from "@mdxeditor/editor";
 
 interface MarkdownEditorProps {
   value: string;
@@ -41,11 +44,14 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
           listsPlugin(),
           quotePlugin(),
           markdownShortcutPlugin(),
+          linkPlugin(),
+          linkDialogPlugin(),
           toolbarPlugin({
             toolbarContents: () => (
               <>
                 <UndoRedo />
                 <BoldItalicUnderlineToggles />
+                <CreateLink />
               </>
             ),
           }),
