@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useEffect } from "react";
 import {
   MDXEditor,
   headingsPlugin,
@@ -10,7 +9,6 @@ import {
   toolbarPlugin,
   UndoRedo,
   BoldItalicUnderlineToggles,
-  type MDXEditorMethods,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import { CreateLink } from "@mdxeditor/editor";

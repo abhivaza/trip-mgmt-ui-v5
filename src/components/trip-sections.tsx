@@ -53,7 +53,6 @@ export function TripSections({
   const [isEditing, setIsEditing] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [customSectionTitle, setCustomSectionTitle] = useState("");
-  const [isCreatingCustom, setIsCreatingCustom] = useState(false);
   const api = useApi();
   const [generatingSectionId, setGeneratingSectionId] = useState<string | null>(
     null
@@ -176,7 +175,6 @@ export function TripSections({
     setSections(updatedSections);
     setThingsToDo(updatedSections);
     setCustomSectionTitle("");
-    setIsCreatingCustom(false);
     setOpen(false);
 
     setExpandedSections((prev) => ({
@@ -362,66 +360,40 @@ export function TripSections({
               <DialogHeader>
                 <DialogTitle>Add Things to do</DialogTitle>
               </DialogHeader>
-              {isCreatingCustom ? (
-                <div className="py-4 space-y-4">
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="custom-section-title"
-                      className="text-sm font-medium"
-                    >
-                      Section Title
-                    </label>
-                    <input
-                      id="custom-section-title"
-                      className="w-full p-2 border rounded-md"
-                      value={customSectionTitle}
-                      onChange={(e) => setCustomSectionTitle(e.target.value)}
-                      placeholder="Enter section title..."
-                    />
-                  </div>
-                  <div className="flex justify-end gap-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => setIsCreatingCustom(false)}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={addCustomSection}
-                      disabled={isGenerating || generatingSectionId !== null}
-                    >
-                      Create Section
-                    </Button>
-                  </div>
+              <>
+                <div className="flex justify-center mt-2 gap-2">
+                  <input
+                    className="flex-1 p-2 border rounded-md"
+                    value={customSectionTitle}
+                    onChange={(e) => setCustomSectionTitle(e.target.value)}
+                    placeholder="Add things to do (or select from templates)..."
+                  />
+                  <Button
+                    onClick={addCustomSection}
+                    disabled={
+                      isGenerating ||
+                      generatingSectionId !== null ||
+                      !customSectionTitle.trim()
+                    }
+                  >
+                    Create Section
+                  </Button>
                 </div>
-              ) : (
-                <>
-                  <div className="grid grid-cols-2 gap-4 py-4">
-                    {SECTION_TEMPLATES.map((template) => (
-                      <Button
-                        key={template.id}
-                        variant="outline"
-                        className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-accent"
-                        onClick={() => addSection(template)}
-                        disabled={isGenerating || generatingSectionId !== null}
-                      >
-                        {getSectionIcon(template.title)}
-                        <span>{template.title}</span>
-                      </Button>
-                    ))}
-                  </div>
-                  <div className="flex justify-center mt-2">
+                <div className="grid grid-cols-2 gap-4">
+                  {SECTION_TEMPLATES.map((template) => (
                     <Button
+                      key={template.id}
                       variant="outline"
-                      onClick={() => setIsCreatingCustom(true)}
+                      className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-accent"
+                      onClick={() => addSection(template)}
                       disabled={isGenerating || generatingSectionId !== null}
                     >
-                      <Plus className="h-4 w-4 mr-2" />
-                      Create Custom Section
+                      {getSectionIcon(template.title)}
+                      <span>{template.title}</span>
                     </Button>
-                  </div>
-                </>
-              )}
+                  ))}
+                </div>
+              </>
             </DialogContent>
           </Dialog>
         </div>

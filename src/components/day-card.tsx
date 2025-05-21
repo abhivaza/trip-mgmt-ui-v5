@@ -155,8 +155,10 @@ export const DayCard = ({
           <span>
             Day {day.dayNumber}: {day.title}
           </span>
-          <span className="text-sm text-muted-foreground font-medium">
-            {day.shortDescription}
+          <span className="text-sm text-muted-foreground">
+            {new Date(day.date).toLocaleDateString("en-US", {
+              weekday: "long",
+            })}
           </span>
         </CardTitle>
         <CardDescription>Place: {day.place}</CardDescription>
