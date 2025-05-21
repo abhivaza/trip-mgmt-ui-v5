@@ -23,18 +23,9 @@ interface MarkdownEditorProps {
 }
 
 export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
-  const editorRef = useRef<MDXEditorMethods>(null);
-
-  useEffect(() => {
-    if (editorRef.current && editorRef.current.getMarkdown() !== value) {
-      editorRef.current.setMarkdown(value);
-    }
-  }, [value]);
-
   return (
     <div className="border rounded-md">
       <MDXEditor
-        ref={editorRef}
         markdown={value}
         onChange={onChange}
         contentEditableClassName="p-4 focus:outline-none max-h-[400px] overflow-y-auto"

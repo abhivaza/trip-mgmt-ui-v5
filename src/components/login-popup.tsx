@@ -26,6 +26,61 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Circle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+const EmailConfirmationPopup = ({
+  showEmailConfirmation,
+  setShowEmailConfirmation,
+  confirmationEmail,
+  setConfirmationEmail,
+  emailLinkUrl,
+  loading,
+  completeSignInWithEmailLink,
+}: {
+  showEmailConfirmation: boolean;
+  setShowEmailConfirmation: (show: boolean) => void;
+  confirmationEmail: string;
+  setConfirmationEmail: (email: string) => void;
+  emailLinkUrl: string;
+  loading: boolean;
+  completeSignInWithEmailLink: (email: string, url: string) => Promise<void>;
+}) => (
+  <Dialog
+    open={showEmailConfirmation}
+    onOpenChange={(open) => !open && setShowEmailConfirmation(false)}
+  >
+    <DialogContent className="sm:max-w-[425px]">
+      <DialogHeader>
+        <DialogTitle>Email Confirmation</DialogTitle>
+      </DialogHeader>
+      <div className="py-4">
+        <p className="mb-4">
+          Please provide your email to complete the sign-in process.
+        </p>
+        <div className="space-y-2">
+          <Label htmlFor="confirmation-email">Email</Label>
+          <Input
+            id="confirmation-email"
+            type="email"
+            value={confirmationEmail}
+            onChange={(e) => setConfirmationEmail(e.target.value)}
+            placeholder="name@example.com"
+            required
+          />
+        </div>
+      </div>
+      <DialogFooter>
+        <Button
+          onClick={() =>
+            completeSignInWithEmailLink(confirmationEmail, emailLinkUrl)
+          }
+          disabled={!confirmationEmail || loading}
+        >
+          {loading ? "Processing..." : "Confirm"}
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+);
+
 export default function LoginPopup({
   isOpen,
   onClose,
@@ -183,45 +238,6 @@ export default function LoginPopup({
       }
     }
   }, []);
-
-  const EmailConfirmationPopup = () => (
-    <Dialog
-      open={showEmailConfirmation}
-      onOpenChange={(open) => !open && setShowEmailConfirmation(false)}
-    >
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Email Confirmation</DialogTitle>
-        </DialogHeader>
-        <div className="py-4">
-          <p className="mb-4">
-            Please provide your email to complete the sign-in process.
-          </p>
-          <div className="space-y-2">
-            <Label htmlFor="confirmation-email">Email</Label>
-            <Input
-              id="confirmation-email"
-              type="email"
-              value={confirmationEmail}
-              onChange={(e) => setConfirmationEmail(e.target.value)}
-              placeholder="name@example.com"
-              required
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button
-            onClick={() =>
-              completeSignInWithEmailLink(confirmationEmail, emailLinkUrl)
-            }
-            disabled={!confirmationEmail || loading}
-          >
-            {loading ? "Processing..." : "Confirm"}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
 
   return (
     <>
@@ -394,7 +410,17 @@ export default function LoginPopup({
         </DialogContent>
       </Dialog>
 
-      {showEmailConfirmation && <EmailConfirmationPopup />}
+      {showEmailConfirmation && (
+        <EmailConfirmationPopup
+          showEmailConfirmation={showEmailConfirmation}
+          setShowEmailConfirmation={setShowEmailConfirmation}
+          confirmationEmail={confirmationEmail}
+          setConfirmationEmail={setConfirmationEmail}
+          emailLinkUrl={emailLinkUrl}
+          loading={loading}
+          completeSignInWithEmailLink={completeSignInWithEmailLink}
+        />
+      )}
     </>
   );
 }

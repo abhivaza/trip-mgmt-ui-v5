@@ -31,8 +31,8 @@ export default function Header() {
   const userName = user?.displayName || user?.email?.split("@")[0] || "there";
 
   return (
-    <header className="py-4 px-4 md:px-8 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
-      <div className="container mx-auto">
+    <header className="bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+      <div className="md:container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-3xl md:text-4xl font-bold">
             <CompanyLogo />
