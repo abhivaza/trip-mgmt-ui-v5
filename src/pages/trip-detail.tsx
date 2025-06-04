@@ -15,6 +15,16 @@ import LoadingSpinner from "../components/loading-spinner";
 import { Calendar, RefreshCw, Edit2, Check, X } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../components/ui/dialog";
+import { Textarea } from "../components/ui/textarea";
+import { Label } from "../components/ui/label";
 
 export default function TripDetailPage() {
   const [itinerary, setItinerary] = useState<Itinerary>();
@@ -23,6 +33,8 @@ export default function TripDetailPage() {
   const [isEditingDate, setIsEditingDate] = useState(false);
   const [newStartDate, setNewStartDate] = useState("");
   const [isRegenerating, setIsRegenerating] = useState(false);
+  const [showRegenerateDialog, setShowRegenerateDialog] = useState(false);
+  const [specialInstructions, setSpecialInstructions] = useState("");
 
   const { trip_id } = useParams<{ trip_id: string }>();
 
@@ -96,15 +108,25 @@ export default function TripDetailPage() {
     }
   };
 
+  const handleRegenerateClick = () => {
+    setSpecialInstructions("");
+    setShowRegenerateDialog(true);
+  };
+
   const handleRegenerateTrip = async () => {
     if (!trip_id) return;
 
     try {
       setIsRegenerating(true);
+      setShowRegenerateDialog(false);
+
+      const requestBody = specialInstructions.trim()
+        ? { specialInstructions: specialInstructions.trim() }
+        : {};
 
       const regeneratedItinerary = await api.post<{}, Itinerary>(
         `/app/trip/${trip_id}/regenerate`,
-        {}
+        requestBody
       );
 
       if (regeneratedItinerary?.itinerary?.length === 0) {
@@ -130,7 +152,13 @@ export default function TripDetailPage() {
       });
     } finally {
       setIsRegenerating(false);
+      setSpecialInstructions("");
     }
+  };
+
+  const handleCancelRegenerate = () => {
+    setShowRegenerateDialog(false);
+    setSpecialInstructions("");
   };
 
   if (isLoading) {
@@ -215,7 +243,7 @@ export default function TripDetailPage() {
 
             <div className="flex-1 flex justify-end">
               <Button
-                onClick={handleRegenerateTrip}
+                onClick={handleRegenerateClick}
                 size="sm"
                 disabled={isRegenerating}
                 className="flex items-center gap-2"
@@ -249,6 +277,56 @@ export default function TripDetailPage() {
           <ChatbotSection chatInitType="trip-specific" />
         </div>
       </div>
+
+      {/* Regenerate Trip Dialog */}
+      <Dialog
+        open={showRegenerateDialog}
+        onOpenChange={setShowRegenerateDialog}
+      >
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Regenerate Trip</DialogTitle>
+            <DialogDescription>
+              Would you like to provide any special instructions for
+              regenerating your trip? This is optional - you can leave it blank
+              to regenerate with the same preferences.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="instructions">
+                Special Instructions (Optional)
+              </Label>
+              <Textarea
+                id="instructions"
+                placeholder="e.g., Include more outdoor activities, focus on local cuisine, avoid crowded places, add cultural experiences..."
+                value={specialInstructions}
+                onChange={(e) => setSpecialInstructions(e.target.value)}
+                className="min-h-[100px] resize-none"
+                maxLength={500}
+              />
+              <div className="text-xs text-muted-foreground text-right">
+                {specialInstructions.length}/500 characters
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={handleCancelRegenerate}>
+              Cancel
+            </Button>
+            <Button onClick={handleRegenerateTrip} disabled={isRegenerating}>
+              <RefreshCw
+                className={`h-4 w-4 mr-2 ${
+                  isRegenerating ? "animate-spin" : ""
+                }`}
+              />
+              {isRegenerating ? "Regenerating..." : "Regenerate Trip"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

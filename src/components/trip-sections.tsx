@@ -275,14 +275,14 @@ export function TripSections({
           activity: string;
           content: string;
           place: string;
-          specialRequest: string;
+          specialInstructions: string;
         },
         Activity
       >(`/app/trip/${tripId}/section/activity/generate`, {
         activity: editingSection.title,
         content: editContent,
         place: place,
-        specialRequest: specialRequest || "",
+        specialInstructions: specialRequest || "",
       });
 
       if (response) {

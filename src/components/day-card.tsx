@@ -103,12 +103,12 @@ export const DayCard = ({
     setIsGenerating(true);
     try {
       const response = await api.post<
-        { place: string; content: string; specialRequest: string },
+        { place: string; content: string; specialInstructions: string },
         ItineraryDayActivity
       >(`/app/trip/${tripId}/day/generate`, {
         place: day.place,
         content: editContent,
-        specialRequest: specialRequest,
+        specialInstructions: specialRequest,
       });
 
       if (response) {
