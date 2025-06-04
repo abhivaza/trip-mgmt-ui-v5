@@ -15,7 +15,6 @@ export interface Itinerary {
 
 export interface ItineraryDayActivity {
   dayNumber: number;
-  date: string;
   place: string;
   title: string;
   shortDescription: string;

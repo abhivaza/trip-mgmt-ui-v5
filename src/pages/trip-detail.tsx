@@ -151,16 +151,10 @@ export default function TripDetailPage() {
         />
       )}
 
-      {/* Trip Header with Controls */}
       {itinerary && (
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-sm border p-4 mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                {itinerary.tripDuration} Day Trip to {itinerary.city},{" "}
-                {itinerary.country}
-              </h1>
-
               <div className="flex items-center gap-4 text-sm text-gray-600">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
@@ -194,7 +188,9 @@ export default function TripDetailPage() {
                     <div className="flex items-center gap-2">
                       <span className="font-medium">
                         {itinerary.fromDate
-                          ? new Date(itinerary.fromDate).toLocaleDateString()
+                          ? new Date(
+                              itinerary.fromDate.substring(0, 10)
+                            ).toLocaleDateString()
                           : "Not set"}
                       </span>
                       <Button
@@ -208,27 +204,19 @@ export default function TripDetailPage() {
                     </div>
                   )}
                 </div>
-
-                {itinerary.fromDate && (
-                  <div className="flex items-center gap-1 text-sm">
-                    <span>End Date:</span>
-                    <span className="font-medium">
-                      {new Date(
-                        new Date(itinerary.fromDate).setDate(
-                          new Date(itinerary.fromDate).getDate() +
-                            (itinerary.tripDuration || 0)
-                        )
-                      ).toLocaleDateString()}
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
+            <div className="flex-1">
+              <TripMeta
+                tags={itinerary?.tags}
+                popularityRank={itinerary?.popularityRank}
+              />
+            </div>
 
-            <div className="flex gap-3">
+            <div className="flex-1 flex justify-end">
               <Button
-                variant="outline"
                 onClick={handleRegenerateTrip}
+                size="sm"
                 disabled={isRegenerating}
                 className="flex items-center gap-2"
               >
@@ -241,11 +229,6 @@ export default function TripDetailPage() {
           </div>
         </div>
       )}
-
-      <TripMeta
-        tags={itinerary?.tags}
-        popularityRank={itinerary?.popularityRank}
-      />
 
       <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-6`}>
         <div className={`w-full`}>

@@ -9,7 +9,7 @@ interface TripImageProps {
 
 export const TripImage = ({ imageURL, highlight, trip }: TripImageProps) => {
   return (
-    <div className="relative w-full h-[300px] mb-8 rounded-lg overflow-hidden">
+    <div className="relative w-full h-[300px] mb-6 rounded-lg overflow-hidden">
       <img
         src={imageURL}
         alt={`${highlight}`}

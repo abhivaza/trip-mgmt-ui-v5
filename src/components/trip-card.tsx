@@ -50,7 +50,7 @@ export function TripCard({ trip, onEdit, onDelete }: TripCardProps) {
           </div>
           <div className="flex items-center text-sm text-gray-500">
             <Calendar className="mr-2 h-4 w-4" />
-            <span className="hidden">
+            <span>
               {new Date(trip.fromDate || "").toLocaleDateString()} -{" "}
               {new Date(
                 new Date(trip.fromDate || "").setDate(
@@ -58,8 +58,8 @@ export function TripCard({ trip, onEdit, onDelete }: TripCardProps) {
                     (trip.tripDuration || 0)
                 )
               ).toLocaleDateString()}{" "}
+              ({trip.tripDuration} days)
             </span>
-            {trip.tripDuration} days
           </div>
         </CardContent>
       </Link>

@@ -156,9 +156,17 @@ export const DayCard = ({
             Day {day.dayNumber}: {day.title}
           </span>
           <span className="text-sm text-muted-foreground">
-            {new Date(day.date).toLocaleDateString("en-US", {
-              weekday: "long",
-            })}
+            {(() => {
+              if (!itinerary?.fromDate) return "";
+
+              const startDate = new Date(itinerary.fromDate);
+              const currentDate = new Date(startDate);
+              currentDate.setDate(startDate.getDate() + (day.dayNumber - 1));
+
+              return currentDate.toLocaleDateString("en-US", {
+                weekday: "long",
+              });
+            })()}
           </span>
         </CardTitle>
         <CardDescription>Place: {day.place}</CardDescription>
