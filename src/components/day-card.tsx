@@ -149,7 +149,7 @@ export const DayCard = ({
   };
 
   return (
-    <Card className="w-full h-full">
+    <Card className="w-full h-full py-0">
       <CardHeader className="p-4">
         <CardTitle className="flex justify-between items-center">
           <span>

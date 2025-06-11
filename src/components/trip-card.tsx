@@ -30,7 +30,7 @@ export function TripCard({ trip, onEdit, onDelete }: TripCardProps) {
   };
 
   return (
-    <Card className="overflow-hidden transition-shadow hover:shadow-md relative">
+    <Card className="overflow-hidden transition-shadow hover:shadow-md relative py-0">
       <Link to={`/app/trip/${trip.id}`} className="block">
         <img
           src={trip.imageURL || ""}
@@ -39,12 +39,12 @@ export function TripCard({ trip, onEdit, onDelete }: TripCardProps) {
           height={200}
           className="w-full h-40 object-cover"
         />
-        <CardHeader>
+        <CardHeader className="py-4">
           <CardTitle className="text-xl">
             {trip.city}, {trip.country}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-2 pb-4">
           <div className="flex items-center text-sm text-gray-500">
             <MapPin className="mr-2 h-4 w-4" /> {trip.city}, {trip.country}
           </div>
