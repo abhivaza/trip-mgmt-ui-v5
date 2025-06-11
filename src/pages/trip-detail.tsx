@@ -180,7 +180,7 @@ export default function TripDetailPage() {
       )}
 
       {itinerary && (
-        <div className="bg-white rounded-lg shadow-sm border p-4 mb-6">
+        <div className="bg-white rounded-lg shadow-xs border p-4 mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex-1">
               <div className="flex items-center gap-4 text-sm text-gray-600">

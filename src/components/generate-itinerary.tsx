@@ -114,7 +114,7 @@ export const GenerateItinerary = () => {
               handleGenerateItinerary()
             }
           }}
-          className="w-full p-3 rounded-lg focus:outline-none resize-none"
+          className="w-full p-3 rounded-lg focus:outline-hidden resize-none"
           rows={3}
         />
 
@@ -129,8 +129,8 @@ export const GenerateItinerary = () => {
                     inline-block px-3 py-1 mr-3 rounded-full cursor-pointer transition-colors
                     ${
                       activePromptIndex === index % showPrompts.length
-                        ? `bg-gradient-to-r from-gray-600 to-gray-800 text-white shadow-md`
-                        : `bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 text-gray-700 hover:text-gray-800`
+                        ? `bg-linear-to-r from-gray-600 to-gray-800 text-white shadow-md`
+                        : `bg-linear-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 text-gray-700 hover:text-gray-800`
                     }
                   `}
                 >

@@ -24,9 +24,9 @@ export function AIButton() {
       className={cn(
         "relative w-full py-4 px-6 rounded-xl font-medium text-gray-800 shadow-lg",
         "transition-all duration-300 ease-in-out transform hover:scale-[1.02] active:scale-[0.98]",
-        "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-200",
-        "bg-gradient-to-r from-[#ffe4e6] to-[#dbeafe]",
-        "before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-r before:from-[#dbeafe] before:to-[#ffe4e6]",
+        "focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-pink-200",
+        "bg-linear-to-r from-[#ffe4e6] to-[#dbeafe]",
+        "before:absolute before:inset-0 before:rounded-xl before:bg-linear-to-r before:from-[#dbeafe] before:to-[#ffe4e6]",
         "before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:z-[-1]",
         "disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100",
         "border-2 border-gray-300 shadow-[inset_0_-4px_6px_rgba(0,0,0,0.1)]"

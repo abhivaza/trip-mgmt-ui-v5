@@ -54,7 +54,7 @@ export const EditActivityDialog = ({
               }
               value={specialRequest}
               onChange={(e) => setSpecialRequest?.(e.target.value)}
-              className="flex-grow border-none focus:ring-0"
+              className="grow border-none focus:ring-0"
             />
             <Button
               onClick={onGenerateAI}

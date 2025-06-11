@@ -1,5 +1,5 @@
-import { GenerateItinerary } from "../components/generate-itinerary";
-import FeatureSection from "../components/feature-section";
+import { GenerateItinerary } from "@/components/generate-itinerary";
+import FeatureSection from "@/components/feature-section";
 
 export default function HomePage() {
   return (

@@ -114,7 +114,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
           <textarea
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full min-h-[200px] p-4 focus:outline-none resize-none"
+            className="w-full min-h-[200px] p-4 focus:outline-hidden resize-none"
             placeholder="Write your content here using markdown..."
           />
         </TabsContent>

@@ -26,7 +26,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
       <MDXEditor
         markdown={value}
         onChange={onChange}
-        contentEditableClassName="p-4 focus:outline-none max-h-[400px] overflow-y-auto"
+        contentEditableClassName="p-4 focus:outline-hidden max-h-[400px] overflow-y-auto"
         placeholder="Write your content here using markdown..."
         plugins={[
           headingsPlugin(),

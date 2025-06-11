@@ -14,7 +14,7 @@ export default function LoadingSpinner({
     >
       <div className="relative">
         {/* Gradient background pulse */}
-        <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 blur-xl opacity-70" />
+        <div className="absolute inset-0 animate-pulse rounded-full bg-linear-to-r from-pink-200 via-purple-200 to-blue-200 blur-xl opacity-70" />
 
         {/* Main spinner circles */}
         <motion.div
@@ -29,7 +29,7 @@ export default function LoadingSpinner({
           <div className="absolute h-20 w-20 rounded-full border-2 border-transparent border-t-pink-500/20 border-r-purple-500/20 animate-spin" />
 
           {/* Center icon */}
-          <div className="relative h-8 w-8 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 shadow-lg">
+          <div className="relative h-8 w-8 rounded-full bg-linear-to-tr from-pink-500 to-purple-500 shadow-lg">
             <div className="absolute inset-1 rounded-full bg-white" />
           </div>
         </motion.div>
