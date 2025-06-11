@@ -16,5 +16,5 @@ npm run dev
 Add any shadcn components
 
 ```bash
-npx shadcn@latest add
+npx shadcn@latest add --all --overwrite
 ```
