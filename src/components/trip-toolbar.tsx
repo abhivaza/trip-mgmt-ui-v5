@@ -21,7 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Share, Trash2 } from "lucide-react";
+import { Share, Trash2, Map } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useApi } from "@/context/api-provider";
@@ -246,7 +246,15 @@ export function TripToolbar({ trip, className }: ShareTripButtonProps) {
   };
 
   return (
-    <>
+    <div className="flex items-center gap-2">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => router(`/app/trip/${trip.id}/map`)}
+      >
+        <Map className="mr-2 h-4 w-4" />
+        Map View
+      </Button>
       <div className={`flex gap-2 ${className || ""}`}>
         <Button
           variant="secondary"
@@ -284,6 +292,6 @@ export function TripToolbar({ trip, className }: ShareTripButtonProps) {
         title="Delete trip?"
         description="Are you sure you want to delete this trip? This action cannot be undone."
       />
-    </>
+    </div>
   );
 }
