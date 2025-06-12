@@ -76,7 +76,10 @@ export default function TripDetailPage() {
 
   const handleEditStartDate = () => {
     if (itinerary?.fromDate) {
-      setNewStartDate(new Date(itinerary.fromDate).toISOString().split("T")[0]);
+      const [year, month, day] = itinerary.fromDate.split("-").map(String);
+      setNewStartDate(
+        `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`
+      );
     }
     setIsEditingDate(true);
   };
@@ -215,10 +218,16 @@ export default function TripDetailPage() {
                   ) : (
                     <div className="flex items-center gap-2">
                       <span className="font-medium">
-                        {itinerary.fromDate
-                          ? new Date(
-                              itinerary.fromDate.substring(0, 10)
-                            ).toLocaleDateString()
+                        {itinerary?.fromDate
+                          ? (() => {
+                              const [year, month, day] = itinerary.fromDate
+                                .split("-")
+                                .map(String);
+                              return `${year}-${month.padStart(
+                                2,
+                                "0"
+                              )}-${day.padStart(2, "0")}`;
+                            })()
                           : "Not set"}
                       </span>
                       <Button
