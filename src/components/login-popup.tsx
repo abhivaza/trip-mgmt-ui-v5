@@ -119,7 +119,7 @@ export default function LoginPopup({
     } catch (error) {
       console.error(error);
       setError(
-        error instanceof Error ? error.message : "Failed to sign in with Google"
+        error instanceof Error ? error.message : "Failed to log in with Google"
       );
     } finally {
       setLoading(false);
@@ -201,7 +201,7 @@ export default function LoginPopup({
     } catch (error) {
       console.error(error);
       setError(
-        error instanceof Error ? error.message : "Failed to send sign in link"
+        error instanceof Error ? error.message : "Failed to send log in link"
       );
     } finally {
       setLoading(false);
@@ -257,7 +257,7 @@ export default function LoginPopup({
 
             {magicLinkSent ? (
               <div className="text-center space-y-4">
-                <p>Sign in link sent! Check your email to complete sign-in.</p>
+                <p>Log in link sent! Check your email to complete sign-in.</p>
                 <Button
                   variant="outline"
                   onClick={() => setMagicLinkSent(false)}
@@ -306,7 +306,7 @@ export default function LoginPopup({
                       fill="#EA4335"
                     />
                   </svg>
-                  Sign in with Google
+                  Log in with Google
                 </Button>
 
                 <div className="relative">
@@ -321,9 +321,7 @@ export default function LoginPopup({
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">
-                    Enter email to receive sign-in link
-                  </Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     type="email"
@@ -378,7 +376,7 @@ export default function LoginPopup({
                         ? "Processing..."
                         : isSignUp
                         ? "Sign Up"
-                        : "Sign In"}
+                        : "Log In"}
                     </Button>
 
                     <div className="text-center">
@@ -388,9 +386,19 @@ export default function LoginPopup({
                         className="text-sm text-primary hover:underline"
                       >
                         {isSignUp
-                          ? "Already have an account? Sign In"
+                          ? "Already have an account? Log In"
                           : "Don't have an account? Sign Up"}
                       </button>
+                    </div>
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t" />
+                      </div>
+                      <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-background px-2 text-muted-foreground">
+                          Or
+                        </span>
+                      </div>
                     </div>
                   </>
                 )}
@@ -402,7 +410,7 @@ export default function LoginPopup({
                   onClick={handleMagicLink}
                   disabled={loading}
                 >
-                  Send me a link to Sign in
+                  Send me a link to Log In
                 </Button>
               </form>
             )}
