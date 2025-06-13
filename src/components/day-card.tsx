@@ -74,8 +74,8 @@ export const DayCard = ({
       const updatedItinerary = { ...itinerary };
 
       // Update the itinerary with the edited day
-      if (updatedItinerary && updatedItinerary.itinerary) {
-        updatedItinerary.itinerary = updatedItinerary.itinerary.map((d) =>
+      if (updatedItinerary && updatedItinerary.activities) {
+        updatedItinerary.activities = updatedItinerary.activities.map((d) =>
           d.dayNumber === day.dayNumber ? updatedDay : d
         );
 
@@ -118,8 +118,8 @@ export const DayCard = ({
 
         // Update local itinerary state
         const updatedItinerary = { ...itinerary };
-        if (updatedItinerary && updatedItinerary.itinerary) {
-          updatedItinerary.itinerary = updatedItinerary.itinerary.map((d) => {
+        if (updatedItinerary && updatedItinerary.activities) {
+          updatedItinerary.activities = updatedItinerary.activities.map((d) => {
             if (d.dayNumber === day.dayNumber) {
               return {
                 ...d,

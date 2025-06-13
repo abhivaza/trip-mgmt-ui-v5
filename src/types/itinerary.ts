@@ -5,7 +5,7 @@ export interface Itinerary {
   country?: string;
   popularityRank?: number;
   tags?: string[];
-  itinerary?: ItineraryDayActivity[];
+  activities?: ItineraryDayActivity[];
   createdBy?: string;
   fromDate?: string;
   tripDuration?: number;

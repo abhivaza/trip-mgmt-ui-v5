@@ -62,7 +62,7 @@ export default function TripMapPage() {
     );
   }
 
-  const currentDayActivities = itinerary.itinerary?.find(
+  const currentDayActivities = itinerary.activities?.find(
     (day) => day.dayNumber === selectedDay
   );
 
@@ -83,7 +83,7 @@ export default function TripMapPage() {
           </h1>
         </div>
         <div className="flex gap-2 overflow-x-auto pb-2">
-          {itinerary.itinerary?.map((day) => (
+          {itinerary.activities?.map((day) => (
             <Button
               key={day.dayNumber}
               variant={selectedDay === day.dayNumber ? "default" : "outline"}

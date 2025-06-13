@@ -49,7 +49,7 @@ export default function TripDetailPage() {
         setIsLoading(true);
 
         const itineraryData = await api.get<Itinerary>(`/app/trip/${trip_id}`);
-        if (itineraryData?.itinerary?.length === 0) {
+        if (itineraryData?.activities?.length === 0) {
           toast({
             title: "Error",
             description: "Invalid destination." + " " + TRY_AGAIN_TEXT,
@@ -132,7 +132,7 @@ export default function TripDetailPage() {
         requestBody
       );
 
-      if (regeneratedItinerary?.itinerary?.length === 0) {
+      if (regeneratedItinerary?.activities?.length === 0) {
         toast({
           title: "Error",
           description: "Failed to regenerate trip. " + TRY_AGAIN_TEXT,
@@ -270,7 +270,7 @@ export default function TripDetailPage() {
       <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-6`}>
         <div className={`w-full`}>
           <div className="flex flex-col gap-6">
-            {itinerary?.itinerary?.map((day) => (
+            {itinerary?.activities?.map((day) => (
               <DayCard
                 key={day.dayNumber}
                 day={day}

@@ -81,7 +81,7 @@ export const GenerateItinerary = () => {
       );
 
       if (
-        itineraryData?.itinerary?.length == 0 ||
+        itineraryData?.activities?.length == 0 ||
         itineraryData.message != "SUCCESS"
       ) {
         toast({
